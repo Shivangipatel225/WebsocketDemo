@@ -1,0 +1,29 @@
+body {
+    background-color: #f5f5f5;
+}
+
+#main-content {
+    max-width: 2040px;
+    padding: 0.3em 1em;
+    margin: 0 auto 0;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  }
+
+  .btn-group button {
+    padding: 5px 5px; /* Some padding */
+    margin: 3px;
+    cursor: pointer; /* Pointer/hand icon */
+    width: 50%; /* Set a width if needed */
+    display: block; /* Make the buttons appear below each other */
+  }
