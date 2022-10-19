@@ -22,6 +22,7 @@ function connect() {
          	xhr.setRequestHeader('Authorization', 'Bearer '+$("#token").val());
          	xhr.setRequestHeader('channel-id', $("#name").val());
 			 xhr.setRequestHeader('Content-Type', 'application/json');
+			 xhr.setRequestHeader('x-adobe-app-id', 'ANSAppId');
          	//xhr.setRequestHeader('x-target-user-id', $("#name").val()+'@AdobeID');
          	//xhr.setRequestHeader('x-target-app-id', 'ANSAppId');
          },
