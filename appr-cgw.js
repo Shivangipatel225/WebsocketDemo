@@ -14,20 +14,20 @@ function setConnected(connected) {
 function connect() {
 	//connect to stomp where stomp endpoint is exposed
 	$.ajax({
-         url: "https://cgw-stage-ans-team-ans.ethos02-stage-va6.ethos.adobe.net/generate-signed-url",
+         url: "https://"+$("#host").val()+"/generate-signed-url",
          type: "GET",
          beforeSend: function(xhr){
 			xhr.setRequestHeader('X-Gw-Cookie-Path', 'websocket/ping');
-         	xhr.setRequestHeader('X-Api-Key', 'ANS1');
+         	xhr.setRequestHeader('X-Api-Key', $("#apikey").val());
          	xhr.setRequestHeader('Authorization', 'Bearer '+$("#token").val());
-         	xhr.setRequestHeader('x-adobe-app-id', 'ANSAppId');
+         	xhr.setRequestHeader('x-adobe-app-id', $("#appid").val());
          	//xhr.setRequestHeader('x-target-user-id', $("#name").val()+'@AdobeID');
-         	//xhr.setRequestHeader('x-target-app-id', 'ANSAppId');
+         	//xhr.setRequestHeader('x-target-app-id', $("#appid").val());
          },
 		// data: JSON.stringify({
-		// 		'x-adobe-app-id': 'ANSAppId',
+		// 		'x-adobe-app-id': $("#appid").val(),
 		// 		'x-target-user-id': $("#name").val()+'@AdobeID',
-		// 		'x-target-app-id': 'ANSAppId'
+		// 		'x-target-app-id': $("#appid").val()
 		// 	}),
          success: function(data, status) { 
          	
@@ -144,8 +144,8 @@ function disconnect() {
 
 function sendTimeline() {
 	var queryParams = JSON.stringify( {
-		'authorization' : 'Fake ans1@AdobeID',
-		'adobeAppId' : 'ANSAppId',
+		'authorization' : 'Bearer '+$("#token").val(),
+		'adobeAppId' : $("#appid").val(),
 //		'adobeDeviceId' : '',
 		'userId' : $("#name").val()+'@AdobeID',
 		'appId' : 'TestApplicationId',
@@ -161,11 +161,11 @@ function sendTimeline() {
 
 function sendSearch() {	
 	var queryParams = JSON.stringify( {
-		'authorization' : 'Fake ans1@AdobeID',
-		'adobeAppId' : 'ANSAppId',
+		'authorization' : 'Bearer '+$("#token").val(),
+		'adobeAppId' : $("#appid").val(),
 //		'adobeDeviceId' : '',
 		'userId' : $("#name").val()+'@AdobeID',
-		'appId' : 'ANSAppID',
+		'appId' : $("#appid").val(),
 //		'fromTimeStamp' : 0,
 //	 	'toTimeStamp' : 1,
 //		'pageSize' : 1,
@@ -180,10 +180,10 @@ function sendSearch() {
 	 
 function sendUnreadCount() {
 	var queryParams = JSON.stringify( {
-		'authorization' : 'Fake ans1@AdobeID',
-		'adobeAppId' : 'ANSAppId',
+		'authorization' : 'Bearer '+$("#token").val(),
+		'adobeAppId' : $("#appid").val(),
 		'userId' : $("#name").val()+'@AdobeID',
-		'appId' : 'ANSAppID'
+		'appId' : $("#appid").val()
 //		'imsOrg' : '',
 
 	})
@@ -192,9 +192,9 @@ function sendUnreadCount() {
 	 
 function sendClearUnreadCount() {
 	var queryParams = JSON.stringify( {
-		'authorization' : 'Fake ans1@AdobeID',
-		'adobeAppId' : 'ANSAppId',
-		'appId' : 'ANSAppID',
+		'authorization' : 'Bearer '+$("#token").val(),
+		'adobeAppId' : $("#appid").val(),
+		'appId' : $("#appid").val(),
 		'requestType' : 'SYNCHRONOUS',
 		'clearUnreadCountRequest': {
 			'userId' : $("#name").val()+'@AdobeID'
@@ -206,10 +206,10 @@ function sendClearUnreadCount() {
 
 function sendUpdateNotifications() {
 	var queryParams = JSON.stringify( {
-		'authorization' : 'Fake ans1@AdobeID',
-		'adobeAppId' : 'ANSAppId',
+		'authorization' : 'Bearer '+$("#token").val(),
+		'adobeAppId' : $("#appid").val(),
 		'userId' : $("#name").val()+'@AdobeID',
-		'appId' : 'ANSAppID',
+		'appId' : $("#appid").val(),
 		'updateNotificationRequest': {
 			"notifications": {
 				"notification": [
@@ -227,10 +227,10 @@ function sendUpdateNotifications() {
 
 function sendDeleteNotifications() {
 	var queryParams = JSON.stringify( {
-		'authorization' : 'Fake ans1@AdobeID',
-		'adobeAppId' : 'ANSAppId',
+		'authorization' : 'Bearer '+$("#token").val(),
+		'adobeAppId' : $("#appid").val(),
 		'userId' : $("#name").val()+'@AdobeID',
-		'appId' : 'ANSAppID',
+		'appId' : $("#appid").val(),
 		'requestType': 'SYNCHRONOUS',
 		'deleteNotificationRequest': {
 			'notifications': {
@@ -248,11 +248,11 @@ function sendDeleteNotifications() {
 
 function sendQuery() {
 var queryParams = JSON.stringify( {
-	'authorization' : 'Fake ans1@AdobeID',
-	'adobeAppId' : 'ANSAppID',
+	'authorization' : 'Bearer '+$("#token").val(),
+	'adobeAppId' : $("#appid").val(),
 //		'adobeDeviceId' : '',
 	'userId' : $("#name").val()+'@AdobeID',
-	'appId' : 'ANSAppID',
+	'appId' : $("#appid").val(),
 	'fromTimeStamp' : 0,
 //	 	'toTimeStamp' : 1,
 	'pageSize' : 1,
@@ -269,8 +269,8 @@ ws.send("/ans_server/query", {}, queryParams);
 function sendQueryById() {
 
 var queryByIdParams = JSON.stringify({
-    'authorization' : 'Fake '+$("#name").val()+'@AdobeID',
-    'adobeAppId'    : 'ANSAppId',
+    'authorization' : 'Bearer '+$("#token").val(),
+    'adobeAppId'    : $("#appid").val(),
     'locale'        : 'en_US',
     'notificationIds': [$("#notificationID").val()],
     'imsOrg'        : ''
@@ -285,10 +285,10 @@ ws.send("/ans_server/query_by_id", {}, queryByIdParams);
 function registerUser() {
 	var data = JSON.stringify({
 		'authorization' : 'Bearer '+$("#token").val(),
-		'adobeAppId'    : 'ANSAppId',
+		'adobeAppId'    : $("#appid").val(),
 		//'userId': $("#name").val()+'@AdobeID',
-		//'appId': 'ANSAppId',
-		'fromTimeStamp': '1664953108188'
+		//'appId': $("#appid").val(),
+		'fromTimeStamp': $("#fromT").val()
 	})
 	ws.send("/ans_server/registerUser", {}, data);
 	showGreetingInBold("Registration complete for User "+$("#name").val()+'@AdobeID');

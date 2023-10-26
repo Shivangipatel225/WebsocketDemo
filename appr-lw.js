@@ -20,7 +20,7 @@ function connect() {
 
 function initiateWebSocketConnection(csrf) /*signedURL*/
 {
-	var signedURL = "ws://localhost:8080/anonymous/websocket/ping?csrf-token=5f4f849d-64a8-4829-a09c-d65906a9f035&ip-address=110.56.12.11";
+	var signedURL = "ws://localhost:8080/anonymous/websocket/ping?csrf-token=2afcadb8-7499-40bb-95b9-b184784e219c&ip-address=110.56.12.11";
 	var socket = new WebSocket(signedURL);
 	ws = Stomp.over(socket);
 
