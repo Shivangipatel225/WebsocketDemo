@@ -1,3 +1,5 @@
+import java.time.*;
+	
 var ws;
 function setConnected(connected) {
 	$("#connect").prop("disabled", connected);
@@ -44,7 +46,7 @@ function connect() {
 function initiateWebSocketConnection(signedURL)
 {
 
-	console.log("Connecting to signed URl "+ new LocalDateTime().now);
+	console.log("Connecting to signed URl "+ LocalDateTime.now());
 	var host = "wss://cgw-ans-team-ans.ethos02-stage-va6.ethos.adobe.net/websocket/ping";
 	var socket = new WebSocket(signedURL);
 	ws = Stomp.over(socket);
@@ -60,20 +62,20 @@ function initiateWebSocketConnection(signedURL)
 
 		ws.subscribe("/user/queue/reply", function(message) {
 			showGreeting(message.body);
-			console.log(message+" " + new LocalDateTime().now);
+			console.log(message+" " + LocalDateTime.now());
 		});
 
 		ws.subscribe("/user/queue/notification", function(message) {
 			showNotifications(message.body);
-			console.log(message+" " + new LocalDateTime().now);
+			console.log(message+" " + LocalDateTime.now());
 		});
 
 		ws.subscribe("/topic/message", function(message) {
 			showGreeting(message.body);
-			console.log(message+" " + new LocalDateTime().now);
+			console.log(message+" " + LocalDateTime.now());
 		});
 		
-		console.log("After subscribing " + new LocalDateTime().now);
+		console.log("After subscribing " + LocalDateTime.now());
 		setTimeout(function () { 
 			registerUser();
 		}, 2000);
