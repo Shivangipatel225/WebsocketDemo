@@ -74,57 +74,10 @@ function initiateWebSocketConnection(signedURL) /*signedURL*/
 			showGreeting(message.body);
 			console.log(message);
 		});
-
-		ws.subscribe("/user/notifications/query", function (message) {
-			showGreeting("List of all notifications received.");
-			console.log(message);
-			showNotifications(message.body);
-		})
-
-		ws.subscribe("/user/notifications/query_by_id", function (message) {
-			showGreeting("get Notification By ID API response is received.");
-			console.log(message);
-			showNotifications(message.body);
-		})
-
-		ws.subscribe("/user/notifications/timeline", function (message) {
-			showGreeting("Timeline API response is received.");
-			showGreeting(message.body);
-			console.log(message);
-		})
-
-		ws.subscribe("/user/notifications/search", function (message) {
-			showGreeting("Search API response is received.");
-			showGreeting(message.body);
-			console.log(message);
-		})
-
-		ws.subscribe("/user/notifications/unread_count", function (message) {
-			showGreeting("Unread count API response is received.");
-			showGreeting(message.body);
-			console.log(message);
-		})
-
-		ws.subscribe("/user/notifications/clear_unread_count", function (message) {
-			showGreeting("Clear Unread count API response is received.");
-			showNotifications(message.body);
-			console.log(message);
-		})
-
-		ws.subscribe("/user/notifications/update_notifications", function (message) {
-			showGreeting("Notification "+$("#notificationID").val() +" is marked as READ");
-			console.log(message);
-		})
-
-		ws.subscribe("/user/notifications/delete_notifications", function (message) {
-			showGreeting("Delete Notification API response is received.");
-			showGreeting(message.body);
-			console.log(message);
-		})
-
+		
 		setTimeout(function () { 
 			registerUser();
-		}, 3000);
+		}, 2000);
 	}, function(error) {
 		alert("STOMP error " + error);
 	});
