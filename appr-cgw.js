@@ -41,21 +41,19 @@ function connect() {
 	//initiateWebSocketConnection();
 }
 
-function initiateWebSocketConnection(signedURL) /*signedURL*/
+function initiateWebSocketConnection(signedURL)
 {
 
+	console.log("Connecting to signed URl " + new Date());
 	var host = "wss://cgw-ans-team-ans.ethos02-stage-va6.ethos.adobe.net/websocket/ping";
 	var socket = new WebSocket(signedURL);
 	ws = Stomp.over(socket);
-
+	
 	ws.heartbeat.outgoing = 50000; // client will send heartbeats every 20000ms
     ws.heartbeat.incoming = 120000;  
 	ws.connect({}, function(frame) {
 		setConnected(true);
-		showGreetingInBold("---New connection established for User "+$("#name").val()+'@AdobeID');
 
-		console.log("Connected");
-		console.log(new Date());
 		ws.subscribe("/user/queue/errors", function(message) {
 			alert("Error " + message.body);
 		});
@@ -75,6 +73,7 @@ function initiateWebSocketConnection(signedURL) /*signedURL*/
 			console.log(message);
 		});
 		
+		console.log("After subscribing " + new Date());
 		setTimeout(function () { 
 			registerUser();
 		}, 2000);
